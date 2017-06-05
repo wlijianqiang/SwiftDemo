@@ -15,7 +15,9 @@ class TJSSecondViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    func buttonAction(_ btn:UIButton){
+        DLog(message: "1111")
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

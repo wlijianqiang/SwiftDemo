@@ -15,6 +15,11 @@
 		CD94E0501EE4EA93002FE86D /* SwiftDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E04F1EE4EA93002FE86D /* SwiftDemoTests.swift */; };
 		CD94E05B1EE4EA93002FE86D /* SwiftDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E05A1EE4EA93002FE86D /* SwiftDemoUITests.swift */; };
 		CD94E0691EE53A5D002FE86D /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD94E0681EE53A5D002FE86D /* 1.png */; };
+		CD94E06B1EE543F9002FE86D /* TJSTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E06A1EE543F9002FE86D /* TJSTabBarViewController.swift */; };
+		CD94E0721EE55A68002FE86D /* TJSFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E0711EE55A68002FE86D /* TJSFirstViewController.swift */; };
+		CD94E0741EE55A77002FE86D /* TJSSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E0731EE55A77002FE86D /* TJSSecondViewController.swift */; };
+		CD94E0781EE55A99002FE86D /* TJSThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E0771EE55A99002FE86D /* TJSThirdViewController.swift */; };
+		CD94E07A1EE55AA4002FE86D /* TJSFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E0791EE55AA4002FE86D /* TJSFourViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,11 @@
 		CD94E05A1EE4EA93002FE86D /* SwiftDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDemoUITests.swift; sourceTree = "<group>"; };
 		CD94E05C1EE4EA93002FE86D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD94E0681EE53A5D002FE86D /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		CD94E06A1EE543F9002FE86D /* TJSTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSTabBarViewController.swift; sourceTree = "<group>"; };
+		CD94E0711EE55A68002FE86D /* TJSFirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSFirstViewController.swift; sourceTree = "<group>"; };
+		CD94E0731EE55A77002FE86D /* TJSSecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSSecondViewController.swift; sourceTree = "<group>"; };
+		CD94E0771EE55A99002FE86D /* TJSThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSThirdViewController.swift; sourceTree = "<group>"; };
+		CD94E0791EE55AA4002FE86D /* TJSFourViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSFourViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +111,11 @@
 			children = (
 				CD94E03A1EE4EA92002FE86D /* AppDelegate.swift */,
 				CD94E03C1EE4EA92002FE86D /* ViewController.swift */,
+				CD94E06A1EE543F9002FE86D /* TJSTabBarViewController.swift */,
+				CD94E0711EE55A68002FE86D /* TJSFirstViewController.swift */,
+				CD94E0731EE55A77002FE86D /* TJSSecondViewController.swift */,
+				CD94E0771EE55A99002FE86D /* TJSThirdViewController.swift */,
+				CD94E0791EE55AA4002FE86D /* TJSFourViewController.swift */,
 				CD94E03E1EE4EA92002FE86D /* Main.storyboard */,
 				CD94E0411EE4EA92002FE86D /* Assets.xcassets */,
 				CD94E0681EE53A5D002FE86D /* 1.png */,
@@ -266,8 +281,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD94E0741EE55A77002FE86D /* TJSSecondViewController.swift in Sources */,
 				CD94E03D1EE4EA92002FE86D /* ViewController.swift in Sources */,
+				CD94E0781EE55A99002FE86D /* TJSThirdViewController.swift in Sources */,
+				CD94E06B1EE543F9002FE86D /* TJSTabBarViewController.swift in Sources */,
+				CD94E07A1EE55AA4002FE86D /* TJSFourViewController.swift in Sources */,
 				CD94E03B1EE4EA92002FE86D /* AppDelegate.swift in Sources */,
+				CD94E0721EE55A68002FE86D /* TJSFirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,13 +9,21 @@
 import UIKit
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+         //MARK:_创建window
+        
+        self.window = UIWindow(frame:UIScreen.main.bounds)
+        self.window?.backgroundColor = UIColor.white
+        self.window?.rootViewController = TJSTabBarViewController()
+        self.window?.makeKeyAndVisible()
+        //MARK:_设置全局tabbar的样式
+        UITabBar.appearance().tintColor = UIColor.orange
+        DLog(message: "TEST")
         return true
     }
 
@@ -40,7 +48,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
 }
 
+/*
+ 自定义Log：定义Log的打印内容 获取所在的文件 #FILE 获取所在的方法 #FUNCTION 获取所在行 #LINE
+ 默认参数：当在方法中传参数时，可以传入默认参数，定义：file：String = #file，默认参数在外界传递参数的时候不会显示
+ 全局函数：在AppDelegate中定义全局函数：<T>表示泛型，传打印内容func DLog<T> (message: T,fileName:String = #file,funcName:String = #function,lineNum:Int = #line)
+ DLog在Debug下 打印,在release下 不打印
+ 定义标记项 —>buildSettings—>搜索swift flag—>Debug -> -D DEBUG 做标记--------在项目中实现：#if DEBUG    #endif
+ 
+ 2：let file = (fileName as NSString).lastPathComponent;获取文件的扩展名，(fileName as NSString)将swift的字符串转为OC字符串，并调用OC的方法，关键字as，在截取字符串的时候也通常将swift的字符串转为OC字符串来进行截取
+ 3： print("\(file):\(funcName):\(lineNum):\("打印内容"):\(message)")：插值运算:插值运算"\()"来表示。
+ 
+ */
+func DLog<T>(message:T,fileName:String = #file,funcName:String = #function,lineNum:Int = #line){
+    #if DEBUG
+        let file = (fileName as NSString).lastPathComponent
+        print("\(file):\(funcName):\(lineNum):\("打印内容"):\(message)")
+    #endif
+}
