@@ -14,6 +14,7 @@
 		CD94E0451EE4EA92002FE86D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD94E0431EE4EA92002FE86D /* LaunchScreen.storyboard */; };
 		CD94E0501EE4EA93002FE86D /* SwiftDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E04F1EE4EA93002FE86D /* SwiftDemoTests.swift */; };
 		CD94E05B1EE4EA93002FE86D /* SwiftDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E05A1EE4EA93002FE86D /* SwiftDemoUITests.swift */; };
+		CD94E0691EE53A5D002FE86D /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD94E0681EE53A5D002FE86D /* 1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		CD94E0561EE4EA93002FE86D /* SwiftDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD94E05A1EE4EA93002FE86D /* SwiftDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDemoUITests.swift; sourceTree = "<group>"; };
 		CD94E05C1EE4EA93002FE86D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD94E0681EE53A5D002FE86D /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				CD94E03C1EE4EA92002FE86D /* ViewController.swift */,
 				CD94E03E1EE4EA92002FE86D /* Main.storyboard */,
 				CD94E0411EE4EA92002FE86D /* Assets.xcassets */,
+				CD94E0681EE53A5D002FE86D /* 1.png */,
 				CD94E0431EE4EA92002FE86D /* LaunchScreen.storyboard */,
 				CD94E0461EE4EA92002FE86D /* Info.plist */,
 			);
@@ -236,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD94E0451EE4EA92002FE86D /* LaunchScreen.storyboard in Resources */,
+				CD94E0691EE53A5D002FE86D /* 1.png in Resources */,
 				CD94E0421EE4EA92002FE86D /* Assets.xcassets in Resources */,
 				CD94E0401EE4EA92002FE86D /* Main.storyboard in Resources */,
 			);
@@ -418,6 +422,7 @@
 				DEVELOPMENT_TEAM = PNSNG2F6PC;
 				INFOPLIST_FILE = SwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nover-supertv.SwiftDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -514,6 +519,7 @@
 				CD94E0611EE4EA93002FE86D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD94E0621EE4EA93002FE86D /* Build configuration list for PBXNativeTarget "SwiftDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +528,7 @@
 				CD94E0641EE4EA93002FE86D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD94E0651EE4EA93002FE86D /* Build configuration list for PBXNativeTarget "SwiftDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +537,7 @@
 				CD94E0671EE4EA93002FE86D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
