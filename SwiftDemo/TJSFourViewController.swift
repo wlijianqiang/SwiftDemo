@@ -9,12 +9,7 @@
 import UIKit
 
 class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
- //   @available(iOS 2.0, *)
-//    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-
-   
+ 
     var tableView:UITableView?
     var dataArray:[String]?
     
@@ -32,12 +27,12 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
         self.tableView?.dataSource = self
         self.view.addSubview(self.tableView!)
         
-        //貌似swift 中无法使用
+        //注册cell
         self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier:"cell")
         NSStringFromClass(UITableViewCell.classForCoder())
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,6 +55,15 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
         
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.frame = CGRect(x:0,y:0,width:0,height:30)
+        headerView.backgroundColor = UIColor.yellow
+        return headerView
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        print("你选中了\(indexPath.row)个cell")

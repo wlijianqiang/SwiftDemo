@@ -20,6 +20,7 @@
 		CD94E0741EE55A77002FE86D /* TJSSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E0731EE55A77002FE86D /* TJSSecondViewController.swift */; };
 		CD94E0781EE55A99002FE86D /* TJSThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E0771EE55A99002FE86D /* TJSThirdViewController.swift */; };
 		CD94E07A1EE55AA4002FE86D /* TJSFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E0791EE55AA4002FE86D /* TJSFourViewController.swift */; };
+		CD94E0801EE65644002FE86D /* UIColor_hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E07F1EE65644002FE86D /* UIColor_hexString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		CD94E0731EE55A77002FE86D /* TJSSecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSSecondViewController.swift; sourceTree = "<group>"; };
 		CD94E0771EE55A99002FE86D /* TJSThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSThirdViewController.swift; sourceTree = "<group>"; };
 		CD94E0791EE55AA4002FE86D /* TJSFourViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSFourViewController.swift; sourceTree = "<group>"; };
+		CD94E07F1EE65644002FE86D /* UIColor_hexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor_hexString.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				CD94E03A1EE4EA92002FE86D /* AppDelegate.swift */,
+				CD94E07F1EE65644002FE86D /* UIColor_hexString.swift */,
 				CD94E03C1EE4EA92002FE86D /* ViewController.swift */,
 				CD94E06A1EE543F9002FE86D /* TJSTabBarViewController.swift */,
 				CD94E0711EE55A68002FE86D /* TJSFirstViewController.swift */,
@@ -283,6 +286,7 @@
 			files = (
 				CD94E0741EE55A77002FE86D /* TJSSecondViewController.swift in Sources */,
 				CD94E03D1EE4EA92002FE86D /* ViewController.swift in Sources */,
+				CD94E0801EE65644002FE86D /* UIColor_hexString.swift in Sources */,
 				CD94E0781EE55A99002FE86D /* TJSThirdViewController.swift in Sources */,
 				CD94E06B1EE543F9002FE86D /* TJSTabBarViewController.swift in Sources */,
 				CD94E07A1EE55AA4002FE86D /* TJSFourViewController.swift in Sources */,
