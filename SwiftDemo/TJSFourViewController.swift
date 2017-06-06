@@ -12,7 +12,7 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
  
     var tableView:UITableView?
     var dataArray:[String]?
-    
+    let cellID = "cell"
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,7 +28,7 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
         self.view.addSubview(self.tableView!)
         
         //注册cell
-        self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier:"cell")
+        self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier:cellID)
         NSStringFromClass(UITableViewCell.classForCoder())
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -49,10 +49,9 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
 //        cell?.textLabel?.text = self.dataArray?[indexPath.row]
 //        return cell!
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier:cellID, for: indexPath)
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         cell.textLabel?.text = self.dataArray?[indexPath.row]
-        
         
         return cell
     }

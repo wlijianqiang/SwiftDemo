@@ -15,9 +15,6 @@ class TJSFirstViewController: UIViewController {
 
         self.view.backgroundColor = UIColor.hexStringToColor(hexString: "989898")
         self.addSubViews()
-        for index in 1...5 {
-            DLog(message: "-----\(index)")
-        }
     }
 
     private func addSubViews (){
