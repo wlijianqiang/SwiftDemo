@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XCGLogger
 
 @UIApplicationMain
 
@@ -23,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         //MARK:_设置全局tabbar的样式
         UITabBar.appearance().tintColor = UIColor.orange
+        let log = XCGLogger.default
+        log.setup(level: .debug, showLogIdentifier: true, showFunctionName: true, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, showDate: true, writeToFile: "path/to/file", fileLevel: .debug)
         DLog(message: "TEST")
         return true
     }

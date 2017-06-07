@@ -49,7 +49,7 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
 //        cell?.textLabel?.text = self.dataArray?[indexPath.row]
 //        return cell!
         
-        let cell = tableView.dequeueReusableCell(withIdentifier:cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier:String(cellID), for: indexPath)
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         cell.textLabel?.text = self.dataArray?[indexPath.row]
         
