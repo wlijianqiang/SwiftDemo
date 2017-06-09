@@ -17,6 +17,8 @@ class TJSSecondViewController: UIViewController {
     }
     func buttonAction(_ btn:UIButton){
         DLog(message: "1111")
+        
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

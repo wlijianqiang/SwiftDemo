@@ -65,7 +65,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  3： print("\(file):\(funcName):\(lineNum):\("打印内容"):\(message)")：插值运算:插值运算"\()"来表示。
  
  */
-func DLog<T>(message:T,fileName:String = #file,funcName:String = #function,lineNum:Int = #line){
+func DLog<T>(message:T,
+          fileName:String = #file,
+          funcName:String = #function,
+          lineNum:Int = #line){
     #if DEBUG
         let file = (fileName as NSString).lastPathComponent
         print("\(file):\(funcName):\(lineNum):\("打印内容"):\(message)")

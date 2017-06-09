@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
  
@@ -15,11 +17,15 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
     let cellID = "cell"
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         self.addSubViews()
+        
+        TJSNetHttpTool.shareInstance.getRequest(urlString: "https://api.500px.com/v1/photoss", params: nil, success: { (result) in
+            
+            print("---\(result)---")
+        }) { (error) in
+            print(error)
+        }
     }
-
     func addSubViews() {
         self.dataArray = ["1","2","3","4","5","6"]
         self.tableView = UITableView(frame:self.view.frame,style:UITableViewStyle.plain)

@@ -23,6 +23,9 @@
 		CD94E0781EE55A99002FE86D /* TJSThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E0771EE55A99002FE86D /* TJSThirdViewController.swift */; };
 		CD94E07A1EE55AA4002FE86D /* TJSFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E0791EE55AA4002FE86D /* TJSFourViewController.swift */; };
 		CD94E0801EE65644002FE86D /* UIColor_hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E07F1EE65644002FE86D /* UIColor_hexString.swift */; };
+		CD94E08B1EE9231E002FE86D /* TJSNetHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E08A1EE9231E002FE86D /* TJSNetHttpTool.swift */; };
+		CD94E08C1EE9231E002FE86D /* TJSNetHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E08A1EE9231E002FE86D /* TJSNetHttpTool.swift */; };
+		CD94E08D1EE9231E002FE86D /* TJSNetHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94E08A1EE9231E002FE86D /* TJSNetHttpTool.swift */; };
 		FE17EA6E46A10BF273F3D49E /* Pods_SwiftDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60462ED015D6E8BC4C76EC23 /* Pods_SwiftDemoTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +76,7 @@
 		CD94E0771EE55A99002FE86D /* TJSThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSThirdViewController.swift; sourceTree = "<group>"; };
 		CD94E0791EE55AA4002FE86D /* TJSFourViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSFourViewController.swift; sourceTree = "<group>"; };
 		CD94E07F1EE65644002FE86D /* UIColor_hexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor_hexString.swift; sourceTree = "<group>"; };
+		CD94E08A1EE9231E002FE86D /* TJSNetHttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJSNetHttpTool.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,7 @@
 		CD94E0391EE4EA92002FE86D /* SwiftDemo */ = {
 			isa = PBXGroup;
 			children = (
+				CD94E0891EE91D65002FE86D /* NetworkingTools */,
 				CD94E03A1EE4EA92002FE86D /* AppDelegate.swift */,
 				CD94E07F1EE65644002FE86D /* UIColor_hexString.swift */,
 				CD94E03C1EE4EA92002FE86D /* ViewController.swift */,
@@ -184,6 +189,14 @@
 				CD94E05C1EE4EA93002FE86D /* Info.plist */,
 			);
 			path = SwiftDemoUITests;
+			sourceTree = "<group>";
+		};
+		CD94E0891EE91D65002FE86D /* NetworkingTools */ = {
+			isa = PBXGroup;
+			children = (
+				CD94E08A1EE9231E002FE86D /* TJSNetHttpTool.swift */,
+			);
+			path = NetworkingTools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +277,7 @@
 					CD94E0361EE4EA92002FE86D = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = PNSNG2F6PC;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					CD94E04A1EE4EA93002FE86D = {
@@ -478,6 +492,7 @@
 				CD94E06B1EE543F9002FE86D /* TJSTabBarViewController.swift in Sources */,
 				CD94E07A1EE55AA4002FE86D /* TJSFourViewController.swift in Sources */,
 				CD94E03B1EE4EA92002FE86D /* AppDelegate.swift in Sources */,
+				CD94E08B1EE9231E002FE86D /* TJSNetHttpTool.swift in Sources */,
 				CD94E0721EE55A68002FE86D /* TJSFirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD94E0501EE4EA93002FE86D /* SwiftDemoTests.swift in Sources */,
+				CD94E08C1EE9231E002FE86D /* TJSNetHttpTool.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +511,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD94E05B1EE4EA93002FE86D /* SwiftDemoUITests.swift in Sources */,
+				CD94E08D1EE9231E002FE86D /* TJSNetHttpTool.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +595,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -631,12 +649,15 @@
 			baseConfigurationReference = AB8A62C8E098D085D25280F6 /* Pods-SwiftDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = PNSNG2F6PC;
 				INFOPLIST_FILE = SwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nover-supertv.SwiftDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftDemo/SwiftDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -646,11 +667,13 @@
 			baseConfigurationReference = 459DE9C13E23CCD1C1615F4F /* Pods-SwiftDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = PNSNG2F6PC;
 				INFOPLIST_FILE = SwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nover-supertv.SwiftDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftDemo/SwiftDemo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

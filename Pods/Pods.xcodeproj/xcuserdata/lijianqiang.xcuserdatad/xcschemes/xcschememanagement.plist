@@ -29,12 +29,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ProgressHUD.xcscheme</key>
+		<key>ReachabilitySwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>SnapKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,27 +52,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>277AEA94E102AAC1B76C3E32C1CF3C4F</key>
+		<key>282569BADB36B2543817A2D1714681CA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2A59627F3DBD4941DA2A5B615E58588D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>421D4137535B017DF90D6BB6E9769EE6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>56D5B301305E8457AD228263BBA418E9</key>
+		<key>56F0459D5193FA9A48899EA3BAA0A197</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>5B0B5B8A1476F8AA333AA7B53F47E96B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>81B4E30165240F3B6AE7101C9FA32518</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -78,6 +78,16 @@
 			<true/>
 		</dict>
 		<key>8A37FA7BF93C487120E0C66EBBF21343</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>92558BFB34AC124B7EA552738225E3BE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ADD1E7ECC36046FC08C33E57A23DA479</key>
 		<dict>
 			<key>primary</key>
 			<true/>

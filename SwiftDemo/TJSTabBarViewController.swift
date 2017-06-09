@@ -14,10 +14,10 @@ class TJSTabBarViewController: UITabBarController {
         super.viewDidLoad()
         //MARK:_1:添加子控件
         //首页
-        addChildViewController(TJSFirstViewController(), title: "首页", imageName: "MainTabItemIcon_0")
+        addChildViewController(TJSFirstViewController(),  title: "首页", imageName: "MainTabItemIcon_0")
         addChildViewController(TJSSecondViewController(), title: "咨询", imageName: "MainTabItemIcon_1")
-        addChildViewController(TJSThirdViewController(), title: "新闻", imageName: "MainTabItemIcon_2")
-        addChildViewController(TJSFourViewController(), title: "我的", imageName: "MainTabItemIcon_4")
+        addChildViewController(TJSThirdViewController(),  title: "新闻", imageName: "MainTabItemIcon_2")
+        addChildViewController(TJSFourViewController(),   title: "我的", imageName: "MainTabItemIcon_4")
     }
 
     private func addChildViewController(_ childController: UIViewController,title:String,imageName:String){

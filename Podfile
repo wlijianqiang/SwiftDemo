@@ -9,6 +9,9 @@ target 'SwiftDemo' do
     pod 'Alamofire' #网络请求事件处理框架 AFNetworking 团队开发
     pod 'SnapKit' #自动布局框架 类似于Masonry
     pod 'XCGLogger'
+    pod 'ReachabilitySwift'
+    pod 'SwiftyJSON'
+    
     
   target 'SwiftDemoTests' do
     inherit! :search_paths
