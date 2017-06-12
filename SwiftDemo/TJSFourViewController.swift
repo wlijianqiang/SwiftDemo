@@ -19,9 +19,12 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         self.addSubViews()
         
+        //Alamofire 示例代码
         TJSNetHttpTool.shareInstance.getRequest(urlString: "https://api.500px.com/v1/photoss", params: nil, success: { (result) in
-            
-            print("---\(result)---")
+         
+            let s = JSON(result)
+    
+            print("---错误信息:\(s["error"])---")
         }) { (error) in
             print(error)
         }

@@ -28,7 +28,16 @@ class TJSFirstViewController: UIViewController {
     }
     
     func buttonAction(_ btn:UIButton){
-        self.navigationController?.pushViewController(ViewController(), animated: true)
+       // self.navigationController?.pushViewController(ViewController(), animated: true)
+        /*swift调用oc文件：
+         1.桥接文件:
+         当你在工程中创建一个OC 类时 系统会自动创建一个名为SwiftProject-Bridging-Header.h的桥头文件  然后把相应的OC import到这个类中即可
+         2. Objective-C Generated Interface Header Name文件
+            这个文件是混编时，系统生成的Swift文件对应的Objective-C的头文件，具体可以在Targets-->Build Settings-->Swift Compiler - General-->Objective-C Generated Interface Header Name进行配置，默认文件名是工程名-Swift.h，一般不做改动。
+         
+         */
+        
+        self.navigationController?.pushViewController(TestViewController(), animated: true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
