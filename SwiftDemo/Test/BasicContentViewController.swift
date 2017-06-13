@@ -19,7 +19,8 @@ class BasicContentViewController: UIViewController {
         //self.AboutString()
        // self.TypeSet()
        // self.ControlFlow()
-        self.Founction()
+       // self.Founction()
+        self.sortMethod()
     }
 
     //MARK:_基础内容
@@ -504,7 +505,31 @@ class BasicContentViewController: UIViewController {
         //函数的实际参数标签和形式参数名
         
     }
-    
+    //MARK:_闭包
+    func sortMethod() {
+        //sorted 方法
+        //sorted(by:) 会根据你提供的排序闭包将已知类型的数组的值进行排序，一旦它排序完成，sorted(by:)方法会返回与原数组类型大小完全相同的一个新数组，该数组的元素是已经排好序的。原始数组不会被 sorted(by:)方法修改
+       let names = ["Chris","Alex","Ewa","Barry","Daniella"]
+        print(names.sorted())//print:["Alex", "Barry", "Chris", "Daniella", "Ewa"]
+        func backward(_ s1: String,_ s2: String)->Bool{
+            return s1 > s2
+        }
+        var reversedNames = names.sorted(by: backward)
+        print(reversedNames)
+        //也可直接将形式参数类型和返回类型都卸载花括号内
+        reversedNames = names.sorted(by: {(s1:String,s2:String)->Bool in return s1 > s2})
+        //从语境中推断类型 因排序闭包为实际参数来传递给函数，故Swift能推断它的形式参数类型和返回类型
+        reversedNames = names.sorted(by: {s1,s2 in return s1 > s2})
+        //从单表达式闭包隐士返回： 单表达式闭包能够通过从他们的声明中删除return 关键字来隐士返回它们单个表达式的结果
+        reversedNames = names.sorted(by: {s1,s2 in s1 > s2})
+        
+        //简写的实际参数名 Swift 自动对行内闭包提供简写实际参数名，你也可以通过$0,$1,$2等名字来引用闭包的实际参数值
+        reversedNames = names.sorted(by: {$0 > $1})
+        //运算符函数 实际上还有一种更简短的方式来撰写上述闭包表达式。Swift 的 String 类型定义了关于大于号（ >）的特定字符串实现，让其作为一个有两个 String 类型形式参数的函数并返回一个 Bool 类型的值。这正好与  sorted(by:) 方法的第二个形式参数需要的函数相匹配。因此，你能简单地传递一个大于号，并且 Swift 将推断你想使用大于号特殊字符串函数实现：
+        reversedNames = names.sorted(by: >)
+        print(reversedNames)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
