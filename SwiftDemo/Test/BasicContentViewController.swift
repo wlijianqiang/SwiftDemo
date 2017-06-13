@@ -17,7 +17,9 @@ class BasicContentViewController: UIViewController {
         //self.test()
         //self.Basicperator()
         //self.AboutString()
-        self.TypeSet()
+       // self.TypeSet()
+       // self.ControlFlow()
+        self.Founction()
     }
 
     //MARK:_基础内容
@@ -221,6 +223,285 @@ class BasicContentViewController: UIViewController {
     }
     //MARK:_集合类型 swift提供了三种主要的集合类型：数组、合集、字典
     func TypeSet() {
+        //数组
+        var someInts = [Int]()
+        print("somrInts is of type [Int] with \(someInts.count) items." )
+        someInts.append(2)
+        print(someInts)
+        //默认值创建数组 可以传给初始化器对应类型的默认值（叫做repeating）和新数组元素的数量（叫做count）
+        var threeDoubles = Array(repeating: 0.0, count: 3)
+        
+        threeDoubles = [1.1,2.2,3.3,4.4]
+        print(threeDoubles)
+        //通过连接两个数组来创建爱数组
+        var anotherThreeDoubles = Array(repeating:2.5,count:3)
+        var sixDoubles = threeDoubles + anotherThreeDoubles
+        print(sixDoubles)
+        //数组字面量创建数组
+        var shoppingList:[String] = ["Eggs","Milk"]
+        print(shoppingList)
+        //访问修改数组
+        print("the shopping list contains \(shoppingList.count) items.")
+        if shoppingList.isEmpty {
+            print("The shopping list is empty")
+        }else{
+            print("The shopping list is not empty.")
+        }
+        shoppingList.append("Jack")
+        
+        shoppingList += ["LiLei","HanMeiMei","WangWei","hehe"]
+        var firstItem = shoppingList[1]//下标取值
+        shoppingList[1] = "what"
+        print(shoppingList)
+        shoppingList[4...6] = ["Banana","Apples"]//使用下标脚本语法来改变一个范围的值，及时替换与范围长度不同的集合也可以
+        shoppingList.insert("ChunGuang", at: 0)
+        shoppingList.remove(at: 3)
+        
+        for item in shoppingList{
+            print(item)
+        }
+        for (index,value) in shoppingList.enumerated(){//enumerated() 方法返回数组中每一个元素的元组，包含这个元素的索引和值
+            print("Item\(index + 1): \(value)")
+        }
+        
+        //合集
+        var letters = Set<Character>()
+        letters.insert("a")
+        letters = ["q","w","e","r","q","e"]
+        print(letters)
+        
+        if letters.contains("q") {
+            print("有此元素")
+        }else{
+            print("无此元素")
+        }
+        /*基本合集操作:
+         intersection(_:)创建只包含两个合集共有值得新合集
+         symmetricDifference(_:)创建只包含两个合集各自有的非共有值得新合集
+         union(_:)创建一个包含两个合集所有制的新合集
+         sbutracting(_:)创建一个两个合集当中不包含某个合集值得新合集
+         */
+        let oddDigits: Set = [1,3,5,7,9]
+        let eventDigits: Set = [0,2,4,6,8]
+        let singleDegitPrimeNumbers: Set = [2,3,5,7]
+        
+        let s =  oddDigits.union(eventDigits).sorted()
+        print(s)
+       let ss = oddDigits.intersection(eventDigits).sorted()
+        print(ss)
+       let sss = oddDigits.subtracting(singleDegitPrimeNumbers).sorted()
+        print(sss)
+        let ssss = oddDigits.symmetricDifference(singleDegitPrimeNumbers).sorted()
+        print(ssss)
+        
+        /*合集成员关系和相等性
+         == 判断两个合集是否包含相同的值
+         isSubset(of:) 确定一个合集的所有值是被某合集包含
+         isSuperset(of:) 确定一个合集是否包含某个合集的所有值
+         isStrictSubSet(of:) or isStrictSuperset(of:) 确定是个合集是否为某一个合集的子集或者超集，但并不相等
+        isDisjoint(with:)判断两个合集是否拥有完全不同的值
+         */
+        let houseAnimals: Set = ["🐶", "🐱"]
+        let farmAnimals: Set = ["🐮", "🐔", "🐑", "🐶", "🐱"]
+        let cityAnimals: Set = ["🐦", "🐭"]
+        print(houseAnimals.isSubset(of: farmAnimals))
+        print(farmAnimals.isSuperset(of: houseAnimals))
+        print(farmAnimals.isDisjoint(with: cityAnimals))
+        
+        //字典
+        var namesOfIntegers = [Int: String]()
+        var airports: [String : String] = ["yyz":"toronto Pearson","dub":"dublin"]
+        
+        if airports.isEmpty {
+            print("ss")
+        }
+        airports["yyz"] = "weirughivjkc"
+        print(airports)
+        let oldValue = airports.updateValue("dfghdgndg", forKey: "dub")
+        print(airports)
+      //  airports.removeValue(forKey: "dub")
+      //  print(airports)
+        
+        for menu in airports{
+            print("--\(menu)--")
+        }
+        let airportCodes = [String](airports.keys)
+        print(airportCodes)
+        let airportNames = [String](airports.values)
+        print(airportNames)
+    }
+    //MARK:_控制流
+    func ControlFlow(){
+        //For-in 循环
+        let names = ["Anna", "Alex", "Brian", "Jack"]
+        
+        for name in names {
+            print("Hello, \(name)!")
+        }
+        let numberOfLegs = ["spider": 8, "ant": 6, "cat": 4]
+        for (animalName, legCount) in numberOfLegs {
+            print("\(animalName)s have \(legCount) legs")
+        }
+        
+        for index in 1...5{
+            print("\(index) times 5 is \(index * 5)")
+        }
+        let base = 3
+        let power = 10
+        var answer = 1
+        for _ in 1...power{
+            answer *= base
+        }
+        print(answer)
+        let minutes = 60
+        for tickMark in 0..<minutes{
+            print(tickMark)
+        }
+        let minuteInterval = 5//stride(from:to:by:)函数来跳过不想要的标记
+        for tickMark in stride(from: 0, to: minutes, by: minuteInterval){
+            print(tickMark)
+        }
+        
+        let someCharacter: Character = "z"
+        switch someCharacter {
+        case "a":
+            print("The first letter of the alphabet")
+        case "z":
+            print("The last letter of the alphabet")
+        default:
+            print("Some other character")
+        }
+        
+        //元组
+        let somePoint = (1, 1)
+        switch somePoint {
+        case (0, 0):
+            print("(0, 0) is at the origin")
+        case (_, 0):
+            print("(\(somePoint.0), 0) is on the x-axis")
+        case (0, _):
+            print("(0, \(somePoint.1)) is on the y-axis")
+        case (-2...2, -2...2):
+            print("(\(somePoint.0), \(somePoint.1)) is inside the box")
+        default:
+            print("(\(somePoint.0), \(somePoint.1)) is outside of the box")
+        }
+        
+        let anotherPoint = (2,0)
+        switch anotherPoint {
+        case (let x,0):
+            print("on the x-axis with an x value of \(x)")
+        case (0,let y):
+            print("on the y-axis with a y value of\(y)")
+        case let (x,y):
+            print("somewhere else at(\(x),\(y))")
+        }
+        /*Continue: 告诉循环停止正在做的事情并且再次从头开始循环的下一次遍历
+         Break: 
+         Fallthrough 关键字只是使代码执行直接移动到下一个情况
+         */
+        let integerToDescribe = 5
+        var description = "The number \(integerToDescribe) is "
+        
+        switch integerToDescribe {
+        case  2,3,5,7,11,13,17,19:
+            description += "a prime number,and also"
+            fallthrough
+        default:
+            description += " an inteher."
+        }
+        print(description)
+        
+        //提前退出 guard语句  类似if语句，基于布尔值表达式来执行语句。
+        greet(person: ["name" : "John"])
+        greet(person: ["name" : "John","location": "Cupertino"])
+        
+        //检查API的可用性
+        if #available(iOS 10, macOS 10.12,*){//函数体只在iOS 10及以上版本才会执行；对于macOS平台，只有在macOS 10.12及以上版本才会运行。最后一个实际参数，* ，它需求并表明在其他所有平台，if 函数体执行你在目标里明确的最小部属
+            print("Use iOS 10 APIs on iOS, and use macOS 10.12 APIs on macOS")
+        }else{
+            print("Fall back to earlier iOS and macOS APIs")
+
+        }
+    }
+    func greet(person: [String: String]){
+        guard let name = person["name"]else{
+            return
+        }
+        print("Hello\(name)!")
+        guard let location = person["location"] else {
+          print("I hope the weather is nice near you.")
+            return
+        }
+        print("I hope the weather is nice in \(location).")
+    }
+   //MARK:_函数
+    func Founction() {
+        
+        func green(person: String)->String{//定义一个输入形式参数---- 一个叫做person的String类型值，并返回一个String类型
+            let greeting = "Hello, " + person + "!"
+            return greeting
+        }
+        print(green(person: "Anna"))
+        
+        //函数的形式参数和返回值
+        //无形式参数的函数：函数没有要求必须输入一个参数，这里有一个没有输入形式参数的函数，无论何时它被调用永远会返回相同的String信息
+        func sayHelloWorld()->String{
+            return "hello,world"
+        }
+        print(sayHelloWorld())// prints "hello,world"
+        
+        //多形式参数的函数：函数可以输入多个形式参数，可以写在函数后边的圆括号内，用逗号隔开
+        func greeet(person: String,alreadyGreeeted:Bool)-> String{
+            if alreadyGreeeted {
+                return person + "haha"
+            }else {
+                return person + "hehe"
+            }
+        }
+        print(greeet(person: "wo", alreadyGreeeted: true))
+        //无返回值的函数
+        func greet(person: String) {
+            print("Hello, \(person)!")
+        }
+        greet(person: "Dave")
+        
+        //多返回值函数
+        func minMax(array:[Int])->(min: Int,max:Int){
+            var currentMin = array[0]
+            var currentMax = array[0]
+            for value in array[1..<array.count]{
+                if value < currentMin {
+                    currentMin = value
+                }else if value > currentMax{
+                    currentMax = value
+                }
+            }
+            return (currentMin,currentMax)
+        }
+        
+        let bounds = minMax(array: [7,8,9,343,45,-12])
+        print("min is \(bounds.min) and max is \(bounds.max)")
+        
+        
+        //可选元组返回类型： 如果元组在函数的返回类型中有可能“没有值”，你可以用一个可选元组返回类型来说明整个元组的可能是nil 写法是在可选元组类型的圆括号后边添加一个问号（？）例如（int，int）？或者（String，Int，Bool）？
+        func minMaxs(array:[Int])->(min: Int,max:Int)?{
+            if array.isEmpty {return nil}
+            var currentMin = array[0]
+            var currentMax = array[0]
+            for value in array[1..<array.count]{
+                if value < currentMin {
+                    currentMin = value
+                } else if value > currentMax {
+                    currentMax = value
+                }
+            }
+            return (currentMin,currentMax)
+        }
+        if let boundss = minMaxs(array: []) {
+            print("min is \(boundss.min) and max is \(boundss.max)")
+        }
+        //函数的实际参数标签和形式参数名
         
     }
     
