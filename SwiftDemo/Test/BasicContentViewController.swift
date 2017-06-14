@@ -528,7 +528,94 @@ class BasicContentViewController: UIViewController {
         //运算符函数 实际上还有一种更简短的方式来撰写上述闭包表达式。Swift 的 String 类型定义了关于大于号（ >）的特定字符串实现，让其作为一个有两个 String 类型形式参数的函数并返回一个 Bool 类型的值。这正好与  sorted(by:) 方法的第二个形式参数需要的函数相匹配。因此，你能简单地传递一个大于号，并且 Swift 将推断你想使用大于号特殊字符串函数实现：
         reversedNames = names.sorted(by: >)
         print(reversedNames)
+        //尾随闭包：需要将一个很长的闭包表达式作为函数最后一个实际参数传递给函数，使用尾随闭包将增强函数的可读性，尾随闭包是一个被书写在函数形式参数的括号外面(后面)的闭包表达式
+        reversedNames = names.sorted(){ $0 > $1}
         
+        let digitNames = [0:"Zero",1:"One",2:"Two",3:"Three",4:"Four",5:"Five",6:"Six",7:"Seven",8:"Eight",9:"Nine"]
+        let numbers = [16,58,510]
+        //Swift的Array类型中有一个以闭包表达式为唯一的实际参数的map(_:)方法，数组中每一个元素调用一次该闭包，并且返回该元素所映射的值，具体的映射方式和返回值的类型有闭包来指定
+       
+        let strings = numbers.map{
+            (number)->String in
+            var number = number
+            var output = ""
+            repeat{
+                output = digitNames[number % 10]! + output
+                number /= 10
+            }while number > 0
+            return output
+        }
+        print("====\(strings)===")
+        
+        //捕获值：一个闭包能够从上下文捕获已被定义的常量和变量。即使这些常量和变量的原作用域已经不存在，闭包扔能够再起函数体内引用和修改这些值
+        
+        /*这里有个命名为makeIncrement的函数例子，其中包含一个名叫incrementer的一个内嵌函数。这个内嵌函数incrementer() 函数能在它的上下文捕获两个值，running 和 amount 在捕获这些值后，通过makeIncrement 将incrementer 作为一个闭包返回，每一次调用 incrementer时，将以amount作为增量来增加 runningTotal*/
+        func makeUncrementer(forIncrement amount: Int)-> () -> Int{
+            var runningTotal = 0
+            func incrementer() -> Int{
+                runningTotal += amount
+
+                return runningTotal
+            }
+            
+            return incrementer
+        }
+        
+        let incrementByTen = makeUncrementer(forIncrement: 10)
+        print(incrementByTen)
+        //闭包是引用类型   上例中 incrementer 和 incrementByten 是常量，但是这些常量指向的闭包仍可以增加已捕获的变量runningTotal 的值。这是因为函数和闭包都是引用类型
+        
+        //逃逸闭包 当闭包作为一个实际参数传递给一个函数时，我们就说这个闭包逃逸了
+        var completionHandlers: [()->Void] = []
+        func someFunctionWithEscapingClosure(completionHandler: @escaping ()-> Void){
+            completionHandlers.append(completionHandler)
+        }//此函数 接收一个闭包作为实际参数并添加它到声明在函数外部的数组里。如果不标记函数的形式参数为@escaping，则会遇到编译错误 让闭包@escaping 意味着必须在闭包中显示地引用 self 
+        func someFunctionWithNonescapingClosure(closure: ()->Void) {
+            closure()
+        }
+        class SomeClass {
+            var x = 10
+            func doSomething() {
+//                someFunctionWithEscapingClosure { self.x = 100 }
+//                someFunctionWithNonescapingClosure { x = 200 }
+            }
+        }
+        let instance = SomeClass()
+        instance.doSomething()
+        print(instance.x)
+        
+        //自动闭包：一种自动创建的用来把作为实际参数传递荷藕函数的表达式打包的闭包。它不接受任何实际参数，并且当它被调用时，它会返回内部打包的表达式的值。其好处是通过普通表达式代替显式闭包而使你省略包围函数形式参数的括号
+        var cunstomersInLine = ["Chris","Alex","Ewa","Barry","Daniella"]
+        print(cunstomersInLine.count)
+        
+        let customerProvider = {cunstomersInLine.remove(at: 0)}
+        print(cunstomersInLine.count)
+        
+        print("Now serving \(customerProvider())!")
+        print(customerProvider)//尽管customersINLine 数组的第一个元素以闭包的一部分被移除了，但任务并没有执行直到闭包被实际调用。如果闭包永远不被调用，那么闭包里边的表达式就永远不会求值，注意customerProvider 的类型不是String 而是 ()->String  一个不接受实际参数并且返回一个字符串的函数
+        func serve(customer customerProvider: () -> String){
+            print("Now serving \(customerProvider())!!")
+        }
+        serve(customer: { cunstomersInLine.remove(at: 0)})
+        
+        
+        func servers(customer customerProvider: @autoclosure () -> String){
+            print("Now serving \(customerProvider())!")
+        }
+        servers(customer: cunstomersInLine.remove(at: 0))
+        
+        var customerProviders: [()->String] = []
+        func collectCustomerProviders (_ cistomerProvider: @autoclosure @escaping () -> String){
+            customerProviders.append(customerProvider)
+        }
+        collectCustomerProviders(cunstomersInLine.remove(at: 0))
+        collectCustomerProviders(cunstomersInLine.remove(at: 0))
+        
+        print("Collected \(customerProviders.count) closures.")
+        
+        for customerProvider in customerProviders{
+            print("Now serving \(customerProvider()) !!!")
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
