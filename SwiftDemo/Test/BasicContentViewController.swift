@@ -20,7 +20,10 @@ class BasicContentViewController: UIViewController {
        // self.TypeSet()
        // self.ControlFlow()
        // self.Founction()
-        self.sortMethod()
+       // self.sortMethod()
+       // self.enumTest()
+       // self.classTest()
+        self.methondTest()
     }
 
     //MARK:_基础内容
@@ -615,6 +618,319 @@ class BasicContentViewController: UIViewController {
         
         for customerProvider in customerProviders{
             print("Now serving \(customerProvider()) !!!")
+        }
+    }
+   
+    //MARK:_枚举
+    func enumTest(){
+        //枚举语法 使用关键字 enum定义枚举 然后将其所有的定义内容 放在一个大括号（{}）中
+        enum CompassPoint {
+            case north
+            case south,east,west
+        }
+        
+        var directionToHead = CompassPoint.west
+        directionToHead = .south
+        
+        directionToHead = .south
+        switch directionToHead {
+        case .north:
+            print("Lots of planets have a north")
+        case .south:
+            print("Watch out for penguins")
+        case .east:
+            print("Where the sun rises")
+        case .west:
+            print("Where the skies are blue")
+        default:
+            print("Not a safe place for humans")
+        }
+        enum Barcode{
+            case upc(Int,Int,Int,Int)
+            case qrCode(String)
+        }
+        var productBarcode = Barcode.upc(8, 3455, 51226, 3)
+        productBarcode = .qrCode("ABDSFNOGF")
+    }
+   
+    //MARK:_类和结构体
+    func classTest() {
+        //类和结构体有着相似的语法 关键字为 class 和 struct
+        struct Resolution {
+            var width = 0
+            var height = 0
+        }
+        
+        class VideoMode{
+            var resolution = Resolution()
+            var interlaced = false
+            var frameRate = 0.0
+            var name:String?
+        }
+        //类与结构体实例
+        let someResoltion = Resolution()
+        let someVideoMode = VideoMode()
+        
+        //访问属性
+        print("The width of someResolution is \(someResoltion.width)")
+        print("The width of someResolution is \(someVideoMode.resolution.width)")
+        let vga = Resolution(width: 640,height: 480)
+        var cinema = vga
+        cinema.width = 800
+        
+        //延迟存储属性：延迟存储属性的初始值在其第一次使用时才进行计算，可以通过在其声明钱标注lazy 修饰语来表示一个延迟存储器
+        class DataImporter {
+            var fileName = "data.text"
+        }
+        class DataManager {
+            lazy var importer = DataImporter()
+            var data = [String]()
+        }
+        let manager = DataManager()
+        print("----\(manager)---")
+        print("----\(manager.importer.fileName)----")
+        //枚举定义 计算属性 其实际并不存储值，他们提供一个读取器和一个可选的设置器来间接得到和设置其他的属性和值
+        struct Point {
+            var x = 0.0, y = 0.0
+        }
+        struct Size {
+            var width = 0.0, height = 0.0
+        }
+        //简写设置器(setter)声明  如果一个计算属性的设置器没有为将要被设置的值定义一个名字，那么他将被默认命名为 newValue
+        
+        struct Rect {
+            var origin = Point()
+            var size = Size()
+            var center: Point{
+                get {
+                   let centerX = origin.x + (size.width / 2)
+                   let centerY = origin.y + (size.height / 2)
+                    return Point(x: centerX, y: centerY)
+                }
+                set(newCenter){
+                    origin.x = newCenter.x - (size.width / 2)
+                    origin.y = newCenter.y - (size.height / 2)
+                }
+            }
+            
+        }
+        var square = Rect(origin: Point(x:0.0,y:0.0),size: Size(width: 10.0,height: 10.0))
+        let initialSquareCenter = square.center
+        square.center = Point(x: 15.0,y:15.0)
+        print(initialSquareCenter)
+        print("square.origin is now at (\(square.origin.x),\(square.origin.y))")
+        //只读计算属性：一个有读取器但是没有设置器的计算属性就是所谓的只读计算属性。只读计算属性返回一个值，也可通过点语法访问，但不能被修改为另一个值（你必须用 var 关键字定义计算属性）
+        struct Cuboid {
+            var width = 0.0, height = 0.0, depth = 0.0
+            var volume: Double {
+                return width * height * depth
+            }
+        }
+        let fourByFiveByTwo = Cuboid(width: 4.0, height: 5.0, depth: 2.0)
+        print("the volume of fourByTwo is \(fourByFiveByTwo)")
+  
+        //属性观察者：会观察并对属性值的变化作出回应。当每一个属性的值被设置时，属性观察者都会被调用，即使这个值与该属性当前的值相同
+        class StepCounter {
+            var totalSteps: Int = 0 {
+                willSet(newTotalSteps){
+                    print("About to set totalSteps to \(newTotalSteps)")
+                }
+                didSet {
+                    if totalSteps > oldValue {
+                        print("Add \(totalSteps - oldValue) steps")
+                    }
+                }
+            }
+        }
+        
+        let stepCounter = StepCounter()
+        stepCounter.totalSteps = 200
+        stepCounter.totalSteps = 360
+        
+        //全局和局部变量
+        //类型属性
+        struct SomeStructure {
+            static var storedTypeProperty = "Some value."
+            static var computedTypeProperty: Int {
+                return 1
+            }
+        }
+        
+        enum SomeEnumeration {
+            static var storedTypeProperty = "Some value."
+            static var computedTypeProperty:Int {
+                return 6
+            }
+        }
+        
+        class SomeClass {
+            static var storedTypeProperty = "Some value."
+            static var computedTypeProperty: Int {
+                return 27
+            }
+            class var overrideableComputedTypeProperty:Int {
+                return 107
+            }
+        }
+        //查询和设置类属性
+        print(SomeStructure.storedTypeProperty)// prints "Some value."
+        SomeStructure.storedTypeProperty = "Another value"
+        print(SomeStructure.storedTypeProperty)// prints "Another value."
+        print(SomeEnumeration.computedTypeProperty)// prints "6"
+        print(SomeClass.computedTypeProperty)//prints "27"
+   
+        struct AudioChannel {
+            static let thresholdLevel = 10
+            static var maxInputLevelForAllChannels = 0
+            var currentLevel: Int = 0 {
+                didSet {
+                    if currentLevel > AudioChannel.thresholdLevel{
+                        currentLevel = AudioChannel.thresholdLevel
+                    }
+                    if currentLevel > AudioChannel.maxInputLevelForAllChannels{
+                        AudioChannel.maxInputLevelForAllChannels = currentLevel
+                    }
+                }
+            }
+        }
+        var leftChannel = AudioChannel()
+        var rightChannel = AudioChannel()
+        leftChannel.currentLevel = 7
+        print(leftChannel.currentLevel)
+        print(AudioChannel.maxInputLevelForAllChannels)
+        
+        rightChannel.currentLevel = 11
+        print(rightChannel.currentLevel)
+        print(AudioChannel.maxInputLevelForAllChannels)
+    }
+    
+    //MARK:_方法
+    func methondTest() {
+        
+        class Counter {
+            var count = 0
+            func increment() {
+                count += 1
+                print(count)
+            }
+            func increment(by amount: Int){
+//                count += amount
+                self.count += amount//self 属性
+                print(count)
+            }
+            func reset() {
+                count = 0
+                print(count)
+            }
+        }
+        let counter = Counter()
+        counter.increment()
+        counter.increment(by: 5)
+        counter.reset()
+        
+        struct Point {
+            var x = 0.0, y = 0.0
+            func isToTheRightOf(x:Double)->Bool {
+                return self.x > x
+            }
+        }
+        //self 属性
+        let somePoint = Point(x: 4.0, y: 5.0)
+        if somePoint.isToTheRightOf(x: 1.0) {
+            print("This point is to the right of the line where x == 1.0")
+        }
+        //在实例方法中修改值的类型: 结构体和枚举是值类型，默认情况下，值类型属性不能被自身的实例方法修改
+        struct Points {
+            var x = 0.0, y = 0.0
+            mutating func moveByX(delTax: Double, y deltaY: Double){
+                x += delTax
+                y += deltaY
+            }
+        }
+        var somePoints = Points(x: 1.0, y : 1.0)
+        somePoints.moveByX(delTax: 2.0, y: 3.0)
+        print("The point is now at(\(somePoints.x),\(somePoints.y))")
+        
+        let fixedPoint = Points(x: 3.0, y: 3.0)
+       // fixedPoint.moveByX(delTax: 2.0, y: 3.0)// 你不能在常量结构体类型里调用异变方法，因为自身的属性不能被改变，就算他们是变量属性
+      //在异变方法里指定自身：异变方法可以指定整个实例给隐士的self属性
+        struct Pointt {
+            var x = 0.0, y = 0.0
+            mutating func moveBy(x deltaX: Double,Y deltaY: Double) {
+                self = Pointt(x: x + deltaX, y: y + deltaY)
+            }
+        }
+        var pointTest = Pointt(x: 2.0, y:3.0)
+        print(pointTest.x)
+    
+        //枚举的异变方法可以设置隐士的 self 属性为相同枚举里的不同成员
+        enum triStateSwitch {
+            case off, low, high
+            mutating func next(){
+                switch self {
+                case .off:
+                    self = .low
+                case .low :
+                    self = .high
+                case .high:
+                    self = .off
+                }
+            }
+        }
+        var ovenLight = triStateSwitch.low
+        ovenLight.next()// ovenLight is now equal to .high
+        ovenLight.next()// ovenLight is now equal to .off
+        
+        //类型方法 ： 实例方法是特定类型实例中调用的方法。 同样可以定义在类型本身调用的方法。这类方法被称为类型方法 可通过在 func关键字前使用 static 关键字来明确一个类型方法，类同样可以使用 class 关键字来允许子类重写父类对类型方法的实现
+        class SomeClass {
+            class func someTypeMethod() {
+                
+            }
+        }
+        SomeClass.someTypeMethod()
+        
+        
+        struct LevelTracker {
+            static var highestUnlockedLovel = 1
+            var currentLevel = 1
+            
+            static func unlock(_ level: Int){
+                if level > highestUnlockedLovel { highestUnlockedLovel = level }
+            }
+            static func isUnlocked(_ level: Int)->Bool {
+                return level <= highestUnlockedLovel
+            }
+            @discardableResult
+            mutating func advance(to level: Int)-> Bool {
+                if LevelTracker.isUnlocked(level) {
+                    currentLevel = level
+                    return true
+                }else {
+                    return false
+                }
+            }
+        }
+        class Player {
+            var tracker  = LevelTracker()
+            let playerName: String
+            func completedLevel(level: Int) {
+                LevelTracker.unlock(level + 1)
+                tracker.advance(to: level + 1)
+            }
+            init(name: String) {
+                playerName = name
+            }
+        }
+        
+        var  player = Player(name: "Argyrios")
+        player.completedLevel(level: 1)
+        print("highest unlocked level is now \(LevelTracker.highestUnlockedLovel)")
+        
+        player = Player(name: "Beto")
+        if player.tracker.advance(to: 6) {
+            print("player is now on level 6")
+        }else {
+            print("level 6 hsa not yet been unlocked")
         }
     }
     override func didReceiveMemoryWarning() {
