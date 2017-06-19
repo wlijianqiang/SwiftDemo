@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		034897B0E3D47CDE055469C1 /* Pods_SwiftDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96364DA442EE8EFF069915D8 /* Pods_SwiftDemoUITests.framework */; };
 		28DD5827166B8E1A6E6BC8A0 /* Pods_SwiftDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1669AE512D8DE702A030BEF5 /* Pods_SwiftDemo.framework */; };
+		CD41CAAE1EF798FF0079E4BF /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD41CAAD1EF798FF0079E4BF /* Vehicle.swift */; };
+		CD41CAB21EF79AE40079E4BF /* Bicycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD41CAB11EF79AE40079E4BF /* Bicycle.swift */; };
 		CD8FAC551EEE40D800B72F36 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8FAC541EEE40D800B72F36 /* ViewController.swift */; };
 		CD8FAC581EEE413400B72F36 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8FAC571EEE413400B72F36 /* TestViewController.m */; };
 		CD8FACA41EEE6B5E00B72F36 /* BasicContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8FACA31EEE6B5E00B72F36 /* BasicContentViewController.swift */; };
@@ -58,6 +60,8 @@
 		A942DAFEC7B12F411DA44E5C /* Pods-SwiftDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDemoTests/Pods-SwiftDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		AB8A62C8E098D085D25280F6 /* Pods-SwiftDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDemo/Pods-SwiftDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		B04DBD870C54BC8BE6E364DD /* Pods-SwiftDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDemoUITests/Pods-SwiftDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CD41CAAD1EF798FF0079E4BF /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		CD41CAB11EF79AE40079E4BF /* Bicycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bicycle.swift; sourceTree = "<group>"; };
 		CD8FAC541EEE40D800B72F36 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CD8FAC561EEE413400B72F36 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		CD8FAC571EEE413400B72F36 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 				CD8FAC561EEE413400B72F36 /* TestViewController.h */,
 				CD8FAC571EEE413400B72F36 /* TestViewController.m */,
 				CD8FACA31EEE6B5E00B72F36 /* BasicContentViewController.swift */,
+				CD41CAAD1EF798FF0079E4BF /* Vehicle.swift */,
+				CD41CAB11EF79AE40079E4BF /* Bicycle.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -503,6 +509,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD41CAAE1EF798FF0079E4BF /* Vehicle.swift in Sources */,
 				CD8FAC551EEE40D800B72F36 /* ViewController.swift in Sources */,
 				CD94E0741EE55A77002FE86D /* TJSSecondViewController.swift in Sources */,
 				CD94E0801EE65644002FE86D /* UIColor_hexString.swift in Sources */,
@@ -514,6 +521,7 @@
 				CD94E08B1EE9231E002FE86D /* TJSNetHttpTool.swift in Sources */,
 				CD8FACA41EEE6B5E00B72F36 /* BasicContentViewController.swift in Sources */,
 				CD94E0721EE55A68002FE86D /* TJSFirstViewController.swift in Sources */,
+				CD41CAB21EF79AE40079E4BF /* Bicycle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

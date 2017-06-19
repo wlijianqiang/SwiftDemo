@@ -23,7 +23,10 @@ class BasicContentViewController: UIViewController {
        // self.sortMethod()
        // self.enumTest()
        // self.classTest()
-        self.methondTest()
+       // self.methondTest()
+       // self.subscriptdTest()
+       // self.inheritance()
+        self.initializationTest()
     }
 
     //MARK:_基础内容
@@ -932,6 +935,90 @@ class BasicContentViewController: UIViewController {
         }else {
             print("level 6 hsa not yet been unlocked")
         }
+    }
+   
+    //MARK:_下标
+    func subscriptdTest() {
+        //下标脚本允许你通过在实例名后面的方括号内写一个或多个值对该类的实例进行查询。其语法类似于实例方法和计算属性。使用关键字 subscript 来定义下标，并且指定一个或多个输入形式参数和返回类型
+        struct TimesTable {
+            let multiplier: Int
+            subscript(index: Int) ->Int {
+                return multiplier * index
+            }
+        }
+        let threeTimesTable = TimesTable(multiplier: 3)
+        print("six times three is \(threeTimesTable[6])")
+        
+        struct Matrix {
+            let rows: Int, columns: Int
+            var grid: [Double]
+            init(rows: Int, columns: Int) {
+                self.rows = rows
+                self.columns = columns
+                grid = Array(repeating: 0.0, count: rows * columns)
+            }
+            func indexIsValid(row: Int,column: Int) -> Bool {
+                return row >= 0 && row < rows && column >= 0 && column < columns
+            }
+            subscript(row: Int, column : Int) -> Double {
+                get {
+                    assert(indexIsValid(row: row, column: column), "Index out of range")//断言
+                    return grid[(row * columns) + column]
+                }
+                set {
+                    assert(indexIsValid(row: row, column: column), "Index out of range")
+                    grid[(row * columns) + column] = newValue
+                }
+            }
+        }
+        
+        var matrix = Matrix(rows: 2, columns: 2)
+        matrix[0,1] = 1.5
+        matrix[1,0] = 3.2
+        print("--\(matrix)--")
+      //  let someValue = matrix[2,2]//下标越界
+    }
+    
+    //MARK:_继承
+    func inheritance() {
+        let someVehicle = Vehicle()
+        someVehicle.currentSpeed = 2.34
+        print("Vehice: \(someVehicle.description)")
+        let bicycle = Bicycle()
+        bicycle.hasBasket = true
+        bicycle.currentSpeed = 15.0
+        print("Bicycle: \(bicycle.description)")
+        
+        let tandem = Tandem()
+        tandem.hasBasket = true
+        tandem.currentNumberOfPassengers = 1
+        tandem.currentSpeed = 22.0
+        print("Tandem: \(tandem.description)")
+        
+        //重写 子类可以提供它自己的实例方法、类型方法、实例属性、类型属性或下标脚本的自定义实现。否则它将会从父累继承。要重写而不是继承的一个特征，需要在重写定义面前加上 override 关键字。这样做说明你打算提供一个重写而不是意外提供了一个相同定义。意外重写可能导致意想不到的行为，并且任何没有使用 override 关键字的重写都会在编译时呗诊断为错误。  override 关键字会执行 Swift编译器的检查你重写的类的父类（或者父类的父类）是否与之匹配的声明来供你重写。这个检查确保你重写的定义是正确的
+        
+        //访问父类的方法、属性和下标脚本 ：当你为子类提供了一个方法、属性或下标脚本时，有时使用现有的父类实现作为你重写的一部分是很有用的。例：你可以重新定义现有实现的行为，或者再现有继承的变量中存出一个修改过的值。 可使用 super 前缀访问父类的方法、属性或下表脚本 
+        
+        let train = Train()
+        train.makeNoise()
+        
+        let car = Car()
+        car.currentSpeed = 25.0
+        car.gear = 3
+        print("Car \(car.description)")
+        
+        //重写属性观察器
+        let automatic = AutomaticCar()
+        automatic.currentSpeed = 35.0
+        print("AutomaticCar: \(automatic.description)")
+        
+        //阻止重写：可通过标记为终点来组织一个方法、属性或下标被重写。 在其关键字前边写 final 修饰符。 任何子类里重写终点方法等的尝试都会被报告为编译错误。在扩展中添加到类的方法、属性或下标脚本也可以在扩展的定义里被标记为终点。 可通过在类定义中在 class 关键字前面写 final 修饰符标记一整个类为终点。任何香葱终点创建子类的行为都会被报告一个编译时错误
+        
+    }
+    
+    //MARK:_初始化
+    func initializationTest() {
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
