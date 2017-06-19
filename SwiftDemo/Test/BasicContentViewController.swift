@@ -1016,9 +1016,150 @@ class BasicContentViewController: UIViewController {
         
     }
     
-    //MARK:_初始化
+    //MARK:_初始化 使用init关键字来写
     func initializationTest() {
         
+//        struct Fahrenheit {
+//            var temperature: Double
+//            init() {
+//                temperature = 32.0
+//            }
+//        }
+//        
+//        var f = Fahrenheit()
+//        print("The default temperature is \(f.temperature)° Fahrenheit")
+        //此结构体定义了一个初始化器， init，没有形式参数，它的初始化储存温度的值为32.0
+        
+        
+        //属性的默认值  可以在初始化器里为存储属性设置初始值。另外，指定一个默认属性值作为属性声明的一部分。当属性被定义的时候你可以通过为这个属性分配一个初始值来指定默认的属性值
+        struct Fahrenheit {//通过提供 temperature 属性的默认值，上面的Fahrenheit 结构体写的更简单
+            var temperature = 32.0
+        }
+        
+        //初始化形式参数
+        struct Celsius {
+            var temperatureCelsius: Double
+            init(fromFahrenheit fahrenheit: Double) {
+                temperatureCelsius = (fahrenheit - 32.0) / 1.8
+            }
+            init(fromKelvin kelvin: Double) {
+                temperatureCelsius = kelvin - 273.15
+            }
+        }
+        
+        let bolilingPointOfWater = Celsius(fromFahrenheit: 212.0)
+        print(bolilingPointOfWater.temperatureCelsius)
+        let freezingPointOfWater = Celsius(fromKelvin: 273.15)
+        print(freezingPointOfWater.temperatureCelsius)
+        
+        
+        //形式参数名和实际参数标签
+        struct Color {
+            let red, green, blue: Double
+            
+            init(red: Double, green: Double,blue: Double){
+                self.red = red
+                self.green = green
+                self.blue = blue
+            }
+            init(white: Double) {
+                red = white
+                green = white
+                blue = white
+            }
+        }
+        let magenta = Color(red: 1.0, green: 0.0, blue: 1.0)
+        let halfGray = Color(white: 0.5)
+        //注意不使用外部名称是不能调用这些初始化器的。如果定义了外部参数名就必须用在初始化器里，省略的话会报一个编译时错误
+       // let varyGreen = Color(0.0,1.0,0.0)
+        
+        //无实际参数标签的初始化器形式参数
+        struct Celsiuss {
+            var temperatureCelsius: Double
+            init(fromFahrenheit fahrenheit: Double) {
+                temperatureCelsius = (fahrenheit - 32.0) / 1.8
+            }
+            init(fromKelvin kelvin: Double) {
+                temperatureCelsius = kelvin - 273.15
+            }
+            init(_ celsius: Double) {
+                temperatureCelsius = celsius
+            }
+        }
+        let bodyTemperature = Celsiuss(37.0)//调用初始化器 有着清楚的意图而不需要外部形式参数名。因此，把初始化器写为 init(_ celsius: Double)是合适的，它也就可以通过提供未命名的 Double 值被调用了。
+        print(bodyTemperature)
+        //可选属性类型
+        class SurveyQuestion {
+            var text: String
+            var response: String?
+            init(text: String){
+                self.text = text
+            }
+            func ask() {
+                print(text)
+            }
+        }
+        let cheeseQuestion = SurveyQuestion(text: "Do you like cheese?")
+        cheeseQuestion.ask()
+        cheeseQuestion.response = "Yes, I do like cheese"
+        
+        //在初始化中分配常量属性: 在初始化的任意时刻，都可以给常量属性赋值，只要它在初始化结束是设置了确定的值即可。一旦为常量属性被赋值，它就不能再被修改了。
+        class SurveyQuestionn {
+            let text: String
+            var response: String?
+            init(text: String) {
+                self.text = text
+            }
+            func ask() {
+                print(text)
+            }
+        }
+        let beetsQuestion = SurveyQuestionn(text: "How about beets?")
+        beetsQuestion.ask()
+        beetsQuestion.response = "I also like beets. (But not with cheese.)"
+        
+        //默认初始化器: Swift为所有没有提供初始化器的结构体或类提供了一个默认的初始化器来给所有的属性提供了默认值。这个默认值的初始化器只是简单的创建了一个所有属性都有默认值的新实例
+        class ShoppingListItem {
+            var name: String?
+            var quantity = 1
+            var purchased = false
+        }
+        var item = ShoppingListItem()
+        
+        //结构体类型的成员初始化器:结构体类型中没有定义任何自定义初始化器，它会自动获得一个成员初始化器。不同于默认初始化器，结构体会接收成员初始化器即使它的存储属性没有默认值
+        struct Size{
+            var width = 0.0, height = 0.0//Size 结构体自动接收一个init(width:heigth:) 成员初始化器，你可以使用它来初始化一个新的Size 实例
+        }
+        let twoByTwo = Size(width: 2.0, height: 2.0)
+        
+        //值类型的初始化器委托
+        struct Sizee {
+            var width = 0.0,height = 0.0
+        }
+        struct Pointt {
+            var x = 0.0, y = 0.0
+        }
+        
+        struct Rect {
+            var origin = Pointt()
+            var size = Sizee()
+            init() {}
+            init(origin: Pointt,size: Sizee){
+                self.origin = origin
+                self.size = size
+            }
+            init(center: Pointt,size: Sizee) {
+                let originX = center.x - (size.width / 2)
+                let originY = center.y - (size.height / 2)
+                self.init(origin:Pointt(x: originX, y: originY),size: size)
+            }
+        }
+        let basiRect = Rect()
+        
+        let originRect = Rect(origin: Pointt(x: 2.0, y:2.0),size:Sizee(width: 5.0,height: 5.0))
+        let centerRect = Rect(center: Pointt(x: 4.0, y: 4.0),size: Sizee(width: 3.0, height: 3.0))
+        
+        //指定初始化器和便捷初始化器语法
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
