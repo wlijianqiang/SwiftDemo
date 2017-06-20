@@ -11,6 +11,7 @@
 		28DD5827166B8E1A6E6BC8A0 /* Pods_SwiftDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1669AE512D8DE702A030BEF5 /* Pods_SwiftDemo.framework */; };
 		CD41CAAE1EF798FF0079E4BF /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD41CAAD1EF798FF0079E4BF /* Vehicle.swift */; };
 		CD41CAB21EF79AE40079E4BF /* Bicycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD41CAB11EF79AE40079E4BF /* Bicycle.swift */; };
+		CD41CAB41EF8C1A40079E4BF /* Vehiclee.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD41CAB31EF8C1A40079E4BF /* Vehiclee.swift */; };
 		CD8FAC551EEE40D800B72F36 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8FAC541EEE40D800B72F36 /* ViewController.swift */; };
 		CD8FAC581EEE413400B72F36 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8FAC571EEE413400B72F36 /* TestViewController.m */; };
 		CD8FACA41EEE6B5E00B72F36 /* BasicContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8FACA31EEE6B5E00B72F36 /* BasicContentViewController.swift */; };
@@ -62,6 +63,7 @@
 		B04DBD870C54BC8BE6E364DD /* Pods-SwiftDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDemoUITests/Pods-SwiftDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CD41CAAD1EF798FF0079E4BF /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		CD41CAB11EF79AE40079E4BF /* Bicycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bicycle.swift; sourceTree = "<group>"; };
+		CD41CAB31EF8C1A40079E4BF /* Vehiclee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehiclee.swift; sourceTree = "<group>"; };
 		CD8FAC541EEE40D800B72F36 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CD8FAC561EEE413400B72F36 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		CD8FAC571EEE413400B72F36 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				CD8FACA31EEE6B5E00B72F36 /* BasicContentViewController.swift */,
 				CD41CAAD1EF798FF0079E4BF /* Vehicle.swift */,
 				CD41CAB11EF79AE40079E4BF /* Bicycle.swift */,
+				CD41CAB31EF8C1A40079E4BF /* Vehiclee.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				CD94E08B1EE9231E002FE86D /* TJSNetHttpTool.swift in Sources */,
 				CD8FACA41EEE6B5E00B72F36 /* BasicContentViewController.swift in Sources */,
 				CD94E0721EE55A68002FE86D /* TJSFirstViewController.swift in Sources */,
+				CD41CAB41EF8C1A40079E4BF /* Vehiclee.swift in Sources */,
 				CD41CAB21EF79AE40079E4BF /* Bicycle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

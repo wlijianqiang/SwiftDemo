@@ -1159,7 +1159,128 @@ class BasicContentViewController: UIViewController {
         let originRect = Rect(origin: Pointt(x: 2.0, y:2.0),size:Sizee(width: 5.0,height: 5.0))
         let centerRect = Rect(center: Pointt(x: 4.0, y: 4.0),size: Sizee(width: 3.0, height: 3.0))
         
-        //指定初始化器和便捷初始化器语法
+        //初始化器的继承和重写：Swift不会默认继承父类的初始化器，这种机制防止父类的简单初始化器被一个更专用的子类继承并被用来创建一个没有完全或错误初始化的新实例的情况发生
+        let vehiclee = Vehiclee()
+        print("Vehiclee: \(vehiclee.description)")
+        
+        let bicyclee = Bicyclee()
+        print("Bicycle: \(bicyclee.description)")
+        
+        //指定和便利初始化器的操作
+        let nameMeat = Food(name: "Bacon")
+        print(nameMeat.name)
+        
+        let oneMysteryItem = RecipeIngredient()
+        let oneBacon = RecipeIngredient(name: "Bacon")
+        let sixEggs = RecipeIngredient(name: "Eggs",quantity: 6)
+        
+        var breakfastList = [
+        ShoppingListItemm(),
+        ShoppingListItemm(name:"Bacons"),
+        ShoppingListItemm(name: "Eggs", quantity: 6)
+        ]
+        
+        breakfastList[0].name = "Orange juice"
+        breakfastList[0].purchased = true
+        for item in breakfastList {
+            print(item.description)
+        }
+        
+        //可失败初始化器：定义类、结构体或枚举初始化时可以失败在某些情况下会管大用。这个失败可能由以下几种方式触发，包括给初始化传入无效的形式参数值，或缺少某种外部所需的资源，又或是其他阻止初始化的情况
+//        let wholeNumnber: Double = 12345.0
+//        let pi = 3.1415926
+//        if let valueMaintained = Int(exactly: wholeNumnber){
+//            print("\(wholeNumnber) conversion to int maintains value")
+//        }
+//        let valueChanged = Int(exactly: pi)
+        struct Animal {
+            let species: String
+            init?(species: String) {
+                if species.isEmpty { return nil}
+                self.species = species
+            }
+        }
+        
+        let someCreature = Animal(species: "Giraffe")
+        
+        if let giraffe = someCreature {
+            print("An animal was initialized with a species of \(giraffe.species)")
+        }
+        
+        let anonymousCreature = Animal(species: "")
+        if anonymousCreature == nil {
+            print("The anonymous creature could not be initialized")
+        }
+        
+        //枚举的可失败初始化器
+        enum TemperatureUnit {
+            case Kelvin, Celsius, Fahrenheit
+            init?(symbol: Character) {
+                switch symbol {
+                case "K":
+                    self = .Kelvin
+                 case "C":
+                    self = .Celsius
+                    case "F":
+                    self = .Fahrenheit
+                default:
+                    return nil
+                }
+            }
+        }
+        
+        let fahrenheitUnit = TemperatureUnit(symbol: "F")
+        if fahrenheitUnit != nil {
+            print("This is a defined temperature unit, so initialization succeeded")
+        }
+        
+        let unknownUnit = TemperatureUnit(symbol: "X")
+        if unknownUnit == nil {
+            print("This is not a defined temperature unit, so initialization failed.")
+        }
+        
+        //带有原始值枚举的可失败初始化器
+        enum TemperatureUnitt: Character {
+            case Kelvin = "K", Celsius = "C", Fahrenheit = "F"
+        }
+        let fahrenheiUnitt = TemperatureUnitt(rawValue: "F")
+        if fahrenheiUnitt != nil {
+            print("This is a defined temperature unit, so initialization succeeded.")
+        }
+        let unknownUnitt = TemperatureUnitt(rawValue: "X")
+        if unknownUnitt == nil {
+            print("This is not a defined temperature unit, so initialization failed.")
+        }
+        
+        //初始化失败的传递： 类、结构体或枚举的可失败初始化器可以横向委托到同一个类、结构体或枚举里的另一个可失败初始化器。类似地，子类的可失败初始化器可以向上委托到父类的可失败初始化器
+        class Product {
+            let name: String
+            init?(name: String) {
+                if name.isEmpty {return nil}
+                self.name = name
+            }
+        }
+        
+        class CartItem: Product {
+            let quantity: Int
+            init?(name: String, quantity: Int){
+                if quantity < 1 { return nil }
+                self.quantity = quantity
+                super.init(name: name)
+            }
+        }
+        if let twoSocks = CartItem(name: "sock",quantity: 2) {
+            print("Item: \(twoSocks.name), quantity: \(twoSocks.quantity)")
+        }
+        if let zeroShirts = CartItem(name: "shirt", quantity: 0) {
+            print("Item: \(zeroShirts.name),quantity: \(zeroShirts.quantity)")
+        }else {
+            print("Unable to initialize zero shirts")
+        }
+        
+        if let oneUnnamed = CartItem(name: "", quantity: 1) {
+            
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
