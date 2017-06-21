@@ -26,7 +26,9 @@ class BasicContentViewController: UIViewController {
        // self.methondTest()
        // self.subscriptdTest()
        // self.inheritance()
-        self.initializationTest()
+       // self.initializationTest()
+       // self.deinitializationTest()
+        self.automatic_reference_countingTest()
     }
 
     //MARK:_基础内容
@@ -172,7 +174,7 @@ class BasicContentViewController: UIViewController {
     //MARK:_字符串和字符
     func AboutString() {
       let someString = "Some string literal value"
-    print(someString)
+        print(someString)
         //连接字符串和字符
         let string1 = "hello"
         let string2 = "there"
@@ -431,6 +433,7 @@ class BasicContentViewController: UIViewController {
 
         }
     }
+   
     func greet(person: [String: String]){
         guard let name = person["name"]else{
             return
@@ -1279,8 +1282,256 @@ class BasicContentViewController: UIViewController {
         }
         
         if let oneUnnamed = CartItem(name: "", quantity: 1) {
-            
+            print("Item: \(oneUnnamed.name), quantity:\(oneUnnamed.quantity)")
+        }else {
+            print("Unable to initialize one unnamed product")
         }
+        //重写可失败初始化器：可在子类里重写父类的可失败初始化器
+        class Document {
+            var name: String?
+            init() {}
+            
+            init?(name: String){
+                self.name = name
+                if name.isEmpty { return nil}
+            }
+        }
+        
+        class AutomaticallyNamedDocument: Document {
+            override init() {
+                super.init()
+                self.name = "[Untitled]"
+            }
+            override init(name: String) {
+                super.init()
+                if name.isEmpty {
+                    self.name = "[Untitled]"
+                }else {
+                    self.name = name
+                }
+            }
+        }
+        class UntitledDocument: Document {
+            override init() {
+                super.init(name: "[Untitled]")!
+            }
+        }
+        
+        //可失败初始化器 init! :通常我们通过关键字后添加问号（init?）的方式来定义一个可失败初始化器 以创建一个合适类型的可选项实例。另外，也可使用可失败初始化器创建一个隐士展开具有合适类型的可选项实例。 通过在 init 后面添加惊叹号( init!)
+        
+        //必要初始化器 ：在初始化器前添加 required 修饰符来表明所有该类的子类都必须实现该初始化类
+        class SomeClasss {
+            required init() {
+                
+            }
+        }
+        //子类重写父类的必要初始化器时，必须在子类的初始化器前同样添加 required 修饰符以却白当其它类继承该子类时，该初始化器同为必要初始化器。在重写父类的必要初始化器时，不需要添加 override 修饰符
+        class SomeSubclasss: SomeClasss {
+            required init( ) {
+            
+            }
+        }
+        //通过闭包和函数来设置属性的默认值： 如果某个存储属性的默认值需要自定义或设置，可使用闭包或全局函数来为属性提供默认值。当这个属性属于的实例初始化时，闭包或函数就会被调用，并且它的返回值就会自耦为属性的默认值   这种闭包函数通常会创建一个和属性相同的临时值，处理这个值以表示初始的状态，并且把这个临时值作为属性的默认值
+       
+        
+        struct Chessboard {
+            let boardColors: [Bool] = {
+                var temporaryBoard = [Bool]()
+                var isBlack = false
+                for i in 1...8 {
+                    for j in 1...8 {
+                        temporaryBoard.append(isBlack)
+                        isBlack = !isBlack
+                    }
+                    isBlack = !isBlack
+                }
+                return temporaryBoard
+            }()
+            
+            func squareIsBlackAt(row: Int, column: Int) -> Bool {
+                return boardColors[(row * 8) + column]
+            }
+        }
+        
+        let board = Chessboard()
+        print(board.squareIsBlackAt(row: 0, column: 1))
+        print(board.squareIsBlackAt(row: 7, column: 7))
+        
+    }
+    
+    //MARK:_反初始化
+    func deinitializationTest() {
+        //反初始化： 在实例被释放的时候，反初始化器就会被立即被调用， 使用 deinit 关键字来写反初始化器，如同写初始化器用init 关键字一样 
+        class Bank {
+            static var coinsInBack = 10_000
+            static func distribute(coins numberOfCoinsRequested: Int) -> Int {
+                let numberOfCoinsToVend = min(numberOfCoinsRequested, coinsInBack)
+                coinsInBack -= numberOfCoinsToVend
+                return numberOfCoinsToVend
+            }
+            static func receive(coins: Int) {
+                coinsInBack += coins
+            }
+        }
+        
+        class Player {
+            var coinsInPurse: Int
+            init(coins: Int) {
+                coinsInPurse = Bank.distribute(coins: coins)
+            }
+            func win(coins: Int) {
+                coinsInPurse += Bank.distribute(coins: coins)
+            }
+            deinit {
+                Bank.receive(coins: coinsInPurse)
+            }
+        }
+        
+        var playerOne: Player? = Player(coins: 100)
+        print("A new player has joined the game with \(playerOne!.coinsInPurse) coins")
+        // Prints "A new player has joined the game with 100 coins"
+        print("There are now \(Bank.coinsInBack) coins left in the bank")
+        // Prints "There are now 9900 coins left in the bank"
+        
+        playerOne?.win(coins: 2_000)
+        print("PlayerOne won 2000 coins & now has \(playerOne?.coinsInPurse) coins")
+        // Prints "PlayerOne won 2000 coins & now has 2100 coins"
+        print("The bank now only has \(Bank.coinsInBack) coins left")
+        // Prints "The bank now only has 7900 coins left"
+        
+        playerOne = nil
+        print("PlayOne has left the game")
+        print("The bank now has \(Bank.coinsInBack) coins")
+        // prints "The bank now has 10000 coins"
+    }
+    
+    //MARK:_自动引用计数器
+    func automatic_reference_countingTest() {
+    //注意：引用计数只应用于类的实例。结构体和枚举是值类型，不是引用类型，没有通过引用存储和传递
+        class Person {
+            let name: String // 定义名为 name 的存储常量属性
+            init(name: String) {//初始化器
+                self.name = name
+                print("\(name) is being initialized")
+            }
+            deinit {//反初始化器 在类的实例被销毁时调用
+                print("\(name) is being deinitialized")
+            }
+        }
+        var reference1: Person? // 定义了三个Person？ 类型的变量
+        var reference2: Person?
+        var reference3: Person?
+        
+        //创建新的Person 实例并将它赋值给三个变量中的一个
+        reference1 = Person(name: "John Appleseed")//Person 实例已经赋值给了 reference1 变量，现在就有了一个从 reference1 到该实例的强引用。因为至少有一个强引用，ARC可以确保Person 一直保持在内存中不被销毁
+        reference2 = reference1
+        reference3 = reference1 //现在Person实例就有了三个强引用了
+        
+        reference1 = nil
+        reference2 = nil //变量赋值 nil 断开两个强引用，只留下了一个强引用
+        
+        reference3 = nil //第三个强引用呗断开时 ARC 销毁Person实例
+        
+        //类实例之间的循环强引用：解决循环强引用问题，通过定义类之间的关系为弱引用（weak）或无主引用（unowned）来代替强引用
+        class Persons {
+            let name: String
+            init(name: String) {
+                self.name = name
+            }
+            var apartment: Apartment?
+            deinit {
+                print("\(name) is being deinitialized")
+            }
+        }
+        class Apartment {
+            let unit: String
+            init(unit: String) {
+                self.unit = unit
+            }
+            var tenant: Persons?
+            deinit {
+                print("Apartment \(unit) is being deinitaialized")
+            }
+        }
+        
+        var john: Persons?
+        var unit4A: Apartment?
+        
+        //循环引用
+        john = Persons(name: "John Appleseed")
+        unit4A = Apartment(unit: "4A")
+        john!.apartment = unit4A
+        unit4A!.tenant = john//感叹号是用来展开和访问可选变量 john 和 unit4A 里的实例的
+        
+        
+        john = nil
+        unit4A = nil//两个变量设为 nil 后 Persons 和 Apartment 实例之间的强引用关系保留了下来并且不会被断开
+    
+        //解决实例之间的循环强引用
+         //Swift提供了两种办法来解决使用类的属性时所遇到的循环强引用问题： 弱引用（weak reference）和无主引用（unowned reference）
+    
+        //1.弱引用
+        class Apartmentt {
+            let unit: String
+            init(unit: String) {
+                self.unit = unit
+            }
+            weak var tenant: Persons?
+            deinit {
+                print("Apartmentt \(unit) is being deinitialized")
+            }
+        }//两个变量（ john 和 unit4A ）之间的强引用和关联创建得与上次相同
+        
+        //2.无主引用：与弱引用类似，无主引用不会牢牢保持住引用的实例。无主引用假定是永远有值得。因此 无主引用总是被定义为非可选类型。 在声明属性或变量时，在前面加上关键字 unowned 来表示这是一个无主引用
+        class Customer {
+            let name: String
+            var card: CreditCard?
+            init(name: String) {
+                self.name = name
+            }
+            deinit {
+                print("\(name) is being deinitialized")
+            }
+        }
+        
+        class CreditCard {
+            let number: UInt64
+            unowned let customer: Customer
+            init(number: UInt64, customer: Customer) {
+                self.number = number
+                self.customer = customer
+            }
+            deinit {
+                print("Card #\(number) is being deinitialized")
+            }
+        }
+        
+        var johnn: Customer?
+        johnn = Customer(name: "Johnn Appleseed")
+        johnn!.card = CreditCard(number: 123_567_9012_3456, customer: johnn!)
+        johnn = nil
+        
+        
+        //3：无主引用和隐式展开的可选属性：两个属性都必须有值，并且初始化完成后永远不允许为 nil 此种场景 需要一个类使用无主属性，而另一个类使用隐式展开的可选属性
+        class Country {
+            let name: String
+            var capitalCity: City!
+            init(name: String, capitalName: String) {
+                self.name = name
+                self.capitalCity = City(name: capitalName, country: self)
+            }
+        }
+        class City {
+            let name: String
+            unowned let country: Country
+            init(name: String, country: Country) {
+                self.name = name
+                self.country = country
+            }
+        }
+        var country = Country(name: "Canada",capitalName: "Ottawa")
+        print("\(country.name)’s capital city is called \(country.capitalCity.name)")
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
