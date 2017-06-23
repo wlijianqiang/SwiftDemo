@@ -28,7 +28,9 @@ class BasicContentViewController: UIViewController {
        // self.inheritance()
        // self.initializationTest()
        // self.deinitializationTest()
-        self.automatic_reference_countingTest()
+       // self.automatic_reference_countingTest()
+       // self.error_handling()
+        self.type_casting()
     }
 
     //MARK:_基础内容
@@ -1532,6 +1534,219 @@ class BasicContentViewController: UIViewController {
         var country = Country(name: "Canada",capitalName: "Ottawa")
         print("\(country.name)’s capital city is called \(country.capitalCity.name)")
         
+        //闭包的循环强引用 闭包捕获列表 （closuer capture list）
+        
+        
+    }
+   
+    //MARK:_错误处理
+    func error_handling() {
+        //Swift 枚举是典型的为一组相关错误条件创建的完美适配类型，关联值还允许错误通讯携带额外的信息
+        enum VendingMachineError: Error {
+            case invalidSelection
+            case insufficientFunds(coinsNeeded: Int)
+            case outOfStock
+        }
+        
+       // throw VendingMachineError.insufficientFunds(coinsNeeded: 5) throw 跑出一个错误允许你明确某些意外的事情发生了并且正常的执行流不能下去
+     
+        //使用抛出函数传递错误
+        func canThrowErrors() throws -> String{//为明确一个函数或者方法可以抛出错误，你要在它的声明中的形式参数后边写上 throws 关键字。使用 throws 标记的函数叫做抛出函数。若它明确了一个返回类型，那么throws关键字要在返回箭头（->）之前。
+           return "everyone"
+        }
+        
+        struct Item {
+            var price: Int
+            var count: Int
+        }
+        
+        class VendingMachine {
+            var inventory = [
+                "Candy Bar": Item(price: 12, count: 7),
+                "Chips":Item(price: 10, count: 4),
+                "Pretzels":Item(price: 7, count: 11)
+            ]
+            var coinsDeposited = 0
+            
+            func vend(itemNamed name: String) throws {//使用gurad语句来提前退出并抛出错误，如果购买零食的条件不符合的话，因为throw语句立即传送程序控制，所以只有条件都达到，物品才会售出
+                guard let item = inventory[name] else {
+                    throw VendingMachineError.invalidSelection
+                }
+                
+                guard item.count > 0 else {
+                    throw VendingMachineError.outOfStock
+                }
+                
+                guard item.price <= coinsDeposited else {
+                    throw VendingMachineError.insufficientFunds(coinsNeeded: item.price - coinsDeposited)
+                }
+                
+                coinsDeposited -= item.price
+                var newItem = item
+                newItem.count -= 1
+                inventory[name] = newItem
+                print("Dispensing \(name)")
+            }
+        }
+        
+        let favoriteSnacks = [
+            "Alice":"Chips",
+            "Bob":"Licorice",
+            "Eve":"Pretzels",
+        ]
+        func buyFavoriteSnak(person: String, vendingMachine: VendingMachine) throws {
+            let snackName = favoriteSnacks[person] ?? "Candy Bar"
+            try vendingMachine.vend(itemNamed: snackName)
+        }
+        //上述例子中。buyFavoriteSnack(person:vendingMachine:)函数查找给定人的最爱零食并且尝试通过调用 vend(itemNamed:)方法来购买它们。由于 vend(itemName:) 方法会抛出错误，调用的时候要在前边用try 关键字。
+        
+        //使用 Do-Catch 处理错误：使用do-catch 语句来通过运行一段代码处理错误。如果do分句中抛出了一个错误，它就会与 catch 分句匹配，以确定其中之一可以处理错误。
+        var vendingMachine = VendingMachine()
+        vendingMachine.coinsDeposited = 8
+        do {
+           // try buyFavoriteSnak(person: "Alice", vendingMachine: vendingMachine)
+        } catch VendingMachineError.invalidSelection {
+            print("Invalid Selection.")
+        } catch VendingMachineError.outOfStock {
+            print("Out of Stock")
+        } catch VendingMachineError.insufficientFunds(coinsNeeded: 5) {
+            print("Insufficient funds. Please an additional coins.")
+        }//此例中 函数buyFavoriteSnack(person:vendingMachine:) 在try表达式中被调用，因为它会抛出错误，如果抛出错误，执行会立即切换到 catch 分局，它决定是否传递来继续。如果没有错误抛出，do语句中剩下的语句将会被执行。
+        
+        //转换错误为可选项：使用 try?通过将错误转换为可选项来处理一个错误。如果一个错误在 try?表达式中抛出，则表达式的值为 nil
+        func someThrowingFunction() throws -> Int {
+           return 1
+        }
+        
+        let x = try? someThrowingFunction()
+        
+        let y:Int?
+        do {
+            y = try someThrowingFunction()
+        } catch {
+            y = nil
+        }
+        
+//        func fetchData() -> Data? {
+//            if let data = try? fetchDataDisk() { return data }
+//            if let data = try? fetchDataFromServer() { return data }
+//            return nil
+//        }
+        //取消错误传递
+//        let photo = try! loadImage("./Resources/John Appleseed.jpg")
+        //指定清理操作
+        
+//        func processFile(filename: String) throws {
+//            if exists(filename) {
+//                let file = open(filename)
+//                defer {
+//                    close(file)
+//                }
+//                while let line = try file.readline()  {
+//                    
+//                }
+//            }
+//        }
+    }
+    //MARK:_类型转换
+    func type_casting() {
+      //类型转换可以判断实例的类型，也可以将该实例在其所在的类层次中视为父类或子类的实例
+        
+        //为类型转换定义类层次
+        class MediaItem {
+            var name: String
+            init(name: String) {
+                self.name = name
+            }
+        }
+        class Movie: MediaItem {
+            var director: String
+            init(name: String,director: String) {
+                self.director = director
+                super.init(name: name)
+            }
+        }
+        class Song: MediaItem {
+            var artist: String
+            init(name: String,artist: String) {
+                self.artist = artist
+                super.init(name: name)
+            }
+        }
+        
+        let library = [
+            Movie(name: "Casablanca", director: "Michaael Curtiz"),
+            Song(name: "Blue Suede Shoes", artist: "Elvis Presley"),
+            Movie(name: "Citizen Kane", director: "Orson Welles"),
+            Song(name: "The One And Only", artist: "Chesney Hawkes"),
+            Song(name: "Never Gonna Give You Up", artist: "Rick Astley")
+        ]//"library"的类型被推断为[MediaItem]
+        /*
+         事实上 library 储存的项目在后台依旧是 Movie 和 Song 实例。总之，如果你遍历这个数组的内容，你取出的项目将会是 MediaItem 类型而非 Movie 或 Song 类型。为了使用他们原生的类型，你需要检查他们的类型或将他们向下转换为不同的类型，如下所述。
+         */
+        
+        //类型检查： 使用类型检查操作符 （is）来检查一个实例是否属于一个特定的子类。如果实例是该子类类型，类型检查操作符返回 true，否则返回 false
+        var movieCount = 0
+        var songCount = 0
+        
+        for item in library {
+            if item is Movie {
+                movieCount += 1
+            }else if item is Song {
+                songCount += 1
+            }
+        }
+        print("Media library contains \(movieCount) movies and \(songCount) songs")
+   //向下类型转换: 某个类类型的常量或变量可能实际上在后台引用自一个子类的实例 可尝试使用类型转换操作符 （as？或 as！）将它向下类型转换至其子类类型
+        for item in library {
+            if let movie = item as? Movie {
+                print("Movie: '\(movie.name)',dir. \(movie.director)")
+            }else if let song = item as? Song {
+                print("Song: '\(song.name)', by \(song.artist)")
+            }
+        }
+        
+     //Any 和 AnyObject 的类型转换 AngObject 可以表示任何类类型的实例  Any 可以表示任何类型，包括函数类型
+        
+        var things = [Any]()
+        
+        things.append(0)
+        things.append(0.0)
+        things.append(42)
+        things.append(3.1415926)
+        things.append("hello")
+        things.append((3.0, 5.0))
+        things.append(Movie(name: "Ghostbusters", director: "Ivan Reitman"))
+        things.append({ (name: String) -> String in "Hello, \(name)"})
+        
+        for thing in things {
+            switch thing {
+            case 0 as Int:
+                print("zero as an Int")
+            case 0 as Double:
+                print("zero as a Double")
+            case let someInt as Int:
+                print("an integer value of \(someInt)")
+            case let someDouble as Double where someDouble > 0:
+                print("a positive double value of \(someDouble)")
+            case is Double:
+                print("some other double value that I don't want to print")
+            case let someString as String:
+                print("a string value of \"\(someString)\"")
+            case let (x, y) as (Double, Double):
+                print("an (x, y) point at \(x), \(y)")
+            case let movie as Movie:
+                print("a movie called '\(movie.name)', dir. \(movie.director)")
+            case let stringConverter as (String) -> String:
+                print(stringConverter("Michael"))
+
+            default:
+                print("something else")
+            }
+        }
+        let optionalNumber: Int? = 3
+        things.append(optionalNumber)
+        things.append(optionalNumber as Any)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
