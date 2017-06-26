@@ -30,7 +30,9 @@ class BasicContentViewController: UIViewController {
        // self.deinitializationTest()
        // self.automatic_reference_countingTest()
        // self.error_handling()
-        self.type_casting()
+       // self.type_casting()
+       // self.extensionsTest()
+        self.access_control()
     }
 
     //MARK:_基础内容
@@ -1747,6 +1749,40 @@ class BasicContentViewController: UIViewController {
         let optionalNumber: Int? = 3
         things.append(optionalNumber)
         things.append(optionalNumber as Any)
+    }
+   
+    //MARK:_扩展
+    func extensionsTest() {//为现有类、结构体、枚举类型、或协议添加了新功能。也包括为无访问权限的源代码扩展类型的能力，Swift的扩展没有名字
+
+    }
+    
+    //MARK:_访问控制
+    func access_control() {//访问控制限制其他源文件和模块对你的代码的访问
+     /*访问级别
+        Open 访问和public访问 允许实体被定义模块中的任意源文件访问，同样可以被另一模块的源文件通过导入该定义模块来访问。在指定框架的公共接口时，通常使用open和public访问。open 是访问最高的访问级别 限制最少
+         open 访问仅适用于类和类成员，它与 public访问区别如下：
+         public 访问，或任何更严格的访问级别的类，只能在其定义模块中被继承
+         public 访问，或任何跟严格的访问级别的类成员，只能被其定义模块的子类重写
+         open 类可以在其定义模块中被继承，也可以在任何导入定义模块的其他模块中被继承
+         open 类成员可以被其定义模块的子类重写，也可以被导入期定义模块的任何模块重写。
+         
+         Internal 访问 允许实体被定义模块中的任意源文件访问，但不能被该模块之外的任何源文件访问。通常定义应用程序或是框架的内部结构时使用。
+         File-private 访问 将实体的使用限制于封装声明中。当一些细节尽在单独的声明中使用时，使用 private 访问隐藏特定功能的实现细节 访问级别最低 限制最多
+        */
+        
+        struct TrackedString {
+            private(set) var numberOfEdits = 0
+            var value: String = ""{
+                didSet {
+                    numberOfEdits += 1
+                }
+            }
+        }
+        var stringToEdit = TrackedString()
+        stringToEdit.value = "This string will be tracked."
+        stringToEdit.value += "This edit will increment numberOfEdits."
+        stringToEdit.value += "So will this one."
+        print("The number of edits is \(stringToEdit.numberOfEdits)")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
