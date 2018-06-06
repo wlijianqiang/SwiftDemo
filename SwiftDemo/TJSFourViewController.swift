@@ -30,15 +30,14 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
     }
     func addSubViews() {
-        self.dataArray = ["1","2","3","4","5","6"]
+        self.dataArray = ["1","2","3","4","5","test"]
         self.tableView = UITableView(frame:self.view.frame,style:UITableViewStyle.plain)
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
+
         self.view.addSubview(self.tableView!)
-        
         //注册cell
         self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier:cellID)
-        NSStringFromClass(UITableViewCell.classForCoder())
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -49,15 +48,6 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let identifier:String = "swiftCell"
-//        var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
-//        if (cell == nil) {
-//            cell = UITableViewCell(style:UITableViewCellStyle.default,reuseIdentifier:identifier)
-//        }
-//        cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-//        cell?.textLabel?.text = self.dataArray?[indexPath.row]
-//        return cell!
-        
         let cell = tableView.dequeueReusableCell(withIdentifier:String(cellID), for: indexPath)
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         cell.textLabel?.text = self.dataArray?[indexPath.row]
@@ -69,12 +59,22 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        headerView.frame = CGRect(x:0,y:0,width:0,height:30)
+        headerView.frame = CGRect(x:0, y:0, width:0, height:40)
         headerView.backgroundColor = UIColor.yellow
         return headerView
     }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView()
+        footerView.frame = CGRect(x:0, y:0, width:0, height:40)
+        footerView.backgroundColor = UIColor.black
+        return footerView
+
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       print("你选中了\(indexPath.row)个cell")
+        tableView.deselectRow(at: indexPath, animated: true)
+       print("你选中了第\(indexPath.row)个cell")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

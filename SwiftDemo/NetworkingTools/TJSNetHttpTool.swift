@@ -37,7 +37,7 @@ extension TJSNetHttpTool{
         }
 
         Alamofire.request(URLStr, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in//使用了闭包,请求后response是自定义的，用于接收服务器响应的信息
-            print("GET_\(response.response)\(response.result.value)")
+            print("GET_\(String(describing: response.response))\(String(describing: response.result.value))")
             switch response.result {
             case .success(let value)://网络请求时，都是通过getRequest 传入的，而success传入的其实是一个接收[String : AnyObject]类型 返回void类型的函数
                 success(value as! [String : AnyObject])
@@ -60,7 +60,7 @@ extension TJSNetHttpTool{
         }
         
         Alamofire.request(URLStr, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
-            print("POST_\(response.response)\(response.result.value)")
+            print("POST_\(String(describing: response.response))\(String(describing: response.result.value))")
             switch response.result{
             case.success(let value):
                 success(value as! [String : AnyObject])

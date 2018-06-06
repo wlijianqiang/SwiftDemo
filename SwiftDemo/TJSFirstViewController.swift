@@ -36,8 +36,9 @@ class TJSFirstViewController: UIViewController {
             这个文件是混编时，系统生成的Swift文件对应的Objective-C的头文件，具体可以在Targets-->Build Settings-->Swift Compiler - General-->Objective-C Generated Interface Header Name进行配置，默认文件名是工程名-Swift.h，一般不做改动。
          
          */
-//        self.navigationController?.pushViewController(TestViewController(), animated: true)
-        self.navigationController?.pushViewController(BasicContentViewController(), animated: true)
+        self.navigationController?.pushViewController(TestViewController(), animated: true)
+//        self.navigationController?.pushViewController(BasicContentViewController(), animated: true)
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

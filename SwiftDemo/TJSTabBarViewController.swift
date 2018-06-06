@@ -13,6 +13,7 @@ class TJSTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //MARK:_1:添加子控件
+        
         //首页
         addChildViewController(TJSFirstViewController(),  title: "首页", imageName: "MainTabItemIcon_0")
         addChildViewController(TJSSecondViewController(), title: "咨询", imageName: "MainTabItemIcon_1")
@@ -27,6 +28,10 @@ class TJSTabBarViewController: UITabBarController {
         childController.tabBarItem.selectedImage = UIImage(named:imageName + "_highlighted")
         //添加子控件
         let childVC = UINavigationController(rootViewController: childController)
+//        childVC.navigationBar.backgroundColor = UIColor.yellow;
+//        childVC.navigationBar.tintColor = UIColor.yellow;
+//        childVC.navigationBar.barTintColor = UIColor.red
+        childVC.navigationBar.barStyle = UIBarStyle.black
         addChildViewController(childVC)
     }
     
