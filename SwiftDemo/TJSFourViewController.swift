@@ -36,9 +36,7 @@ class TJSFourViewController: UIViewController,UITableViewDelegate,UITableViewDat
         self.tableView?.dataSource = self
 
         self.view.addSubview(self.tableView!)
-        //注册cell
-       
-        
+        //注册cell 最新添加
         self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier:cellID)
     }
     func numberOfSections(in tableView: UITableView) -> Int {
